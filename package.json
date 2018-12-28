@@ -1,0 +1,11 @@
+{
+  "name": "nokt-pg",
+  "version": "0.0.1",
+  "description": "A nokt package for pg database",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "NoD Studio",
+  "license": "ISC"
+}
