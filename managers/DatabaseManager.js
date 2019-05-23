@@ -1,3 +1,67 @@
+var InsertManager = require('./InsertManager')
+var SelectManager = require('./SelectManager');
+var UpdateManager = require('./UpdateManager');
+var ResultManager = require('./ResultManager')
+
+module.exports.get = function (classObject, value) {
+  value = {
+      number:2,
+      foreignKey: 1,
+      manyToMany:[1],
+      passwordField:"password",
+      emailField:"email",
+      text:"text",
+      booleanField:true,
+    }
+  var command = SelectManager.select(classObject, value);
+  console.log(command);
+  var object = ResultManager.createObject(classObject,value);
+  throw Error("get is not implemented");
+  return object;
+}
+module.exports.filter = function(model,value){
+  command = SelectManager.select(model,value);
+  row = executeCommand(command);
+  throw Error("filter is not implemented");
+  return object;
+}
+module.exports.all = function(model){
+  command = SelectManager.selectAll(model);
+  row = executeCommand(command);
+  throw Error("all is not implemented");
+  return object;
+}
+
+module.exports.insert = function(object){
+  command = InsertManager.insert(object);
+  res = executeCommand(command);
+  object.id = res[1].rows[0].currval;
+  throw Error("insert is not implemented");
+  return object;
+}
+
+module.exports.update = function(value){
+  throw Error("update is not implemented");
+  return object;
+}
+
+async function executeCommand(command){
+  throw Error("execute command is not implemented");
+  /*
+       const client = new Client({
+           user: process.env.POSTGRES_USER,
+           host: process.env.DB_HOST,
+           database: process.env.POSTGRES_DB,
+           password: process.env.POSTGRES_PASSWORD,
+           port: process.env.DB_PORT,
+         });
+       await client.connect();
+       const res = await client.query(command);
+       await client.end();
+       return res;
+       */
+}
+
 
 var DatabaseManager = class DatabaseManager{
   constructor(){
@@ -44,12 +108,15 @@ var DatabaseManager = class DatabaseManager{
     command = command.substring(0,command.length-2);
     command += ");";
     command += "SELECT currval('"+object.constructor.name+"s_id_seq');"
-    var res = await this.executeCommand(command);
+    console.log(command);
+    /*var res = await this.executeCommand(command);
     object.id = res[1].rows[0].currval;
     for (var i = 0;i<listManyToMany.length;i++){
       listManyToMany[i] = listManyToMany[i].replace("-1",object.id);
       this.executeCommand(listManyToMany[i]);
     }
+    */
+
    }
 
    /**
@@ -209,6 +276,7 @@ var DatabaseManager = class DatabaseManager{
     return command;
   }
   async executeCommand(command){
+    /*
          const client = new Client({
              user: process.env.POSTGRES_USER,
              host: process.env.DB_HOST,
@@ -220,6 +288,7 @@ var DatabaseManager = class DatabaseManager{
          const res = await client.query(command);
          await client.end();
          return res;
+         */
   }
 
 }
