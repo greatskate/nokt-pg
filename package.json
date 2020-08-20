@@ -9,7 +9,7 @@
   "author": "NoD Studio",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^3.0.3"
+    "bcrypt": "^5.0.0"
   },
   "devDependencies": {
     "eslint": "^5.11.1",
